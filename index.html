@@ -39,6 +39,11 @@
     background: var(--cream);
     color: var(--text);
     min-height: 100vh;
+
+   -webkit-user-select: none;
+   -ms-user-select: none;
+   user-select: none;
+   .scroll-hint { display: none; }
     
   }
 
@@ -537,7 +542,8 @@
   }
 </style>
 </head>
-<body>
+<body oncontextmenu="return false;"></body>
+  
 
 <!-- ─── TOP NAV ─── -->
 <nav class="top-nav">
