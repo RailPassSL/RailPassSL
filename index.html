@@ -1076,7 +1076,27 @@
 </div>
 
 <script>
-  function showView(id) { document.querySelectorAll('.view').forEach(v => v.classList.remove('active')); const el = document.getElementById('view-' + id); if (el) { el.classList.add('active'); window.scrollTo(0, 0); } }
+  function showView(id) { 
+    document.querySelectorAll('.view').forEach(v => v.classList.remove('active')); 
+    const el = document.getElementById('view-' + id); 
+    if (el) { el.classList.add('active'); window.scrollTo(0, 0); } 
+    
+    /* ෆෝන් එකෙන් Login හෝ Apply පිටුවට ගියවිට Scroll Down එක පෙන්වීම */
+    const hint = document.getElementById('scroll-hint');
+    if (hint && window.innerWidth <= 768 && (id === 'login' || id === 'apply')) {
+      hint.classList.add('show');
+    } else if (hint) {
+      hint.classList.remove('show');
+    }
+  }
+
+  /* පරිශීලකයා පහළට Scroll කරන විට අදාළ බට්න් එක මැකී යාම */
+  window.addEventListener('scroll', () => {
+    const hint = document.getElementById('scroll-hint');
+    if (hint && hint.classList.contains('show') && window.scrollY > 50) {
+      hint.classList.remove('show');
+    }
+  });
   function showLogin(role) { showView('login'); setRole(role, null); document.querySelectorAll('.role-tab').forEach(t => t.classList.remove('active')); const map = { institution: 0, stationmaster: 1, company: 2 }; const tabs = document.querySelectorAll('.role-tab'); if (tabs[map[role]]) tabs[map[role]].classList.add('active'); }
   let currentRole = 'institution';
   function setRole(role, el) { currentRole = role; if (el) { document.querySelectorAll('.role-tab').forEach(t => t.classList.remove('active')); el.classList.add('active'); } document.getElementById('station-field').style.display = (role === 'stationmaster') ? 'block' : 'none'; }
