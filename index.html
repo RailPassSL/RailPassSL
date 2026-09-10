@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=1200">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>RailPass SL — Digital Season Ticket Portal</title>
+<link rel="icon" type="image/png" href="bg.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=DM+Sans:wght@300;400;500;600&family=Bebas+Neue&display=swap" rel="stylesheet">
 <!-- Scanner Library -->
@@ -38,7 +39,7 @@
     background: var(--cream);
     color: var(--text);
     min-height: 100vh;
-    min-width: 1200px; 
+    
   }
 
   /* ─── VIEWS ─── */
@@ -159,15 +160,16 @@
   }
   
   .card-image-preview {
-    width: 420px;
-    height: 250px;
-    background-image: url('rail pass.png');
-    background-size: cover;
-    background-position: top;
-    border-radius: 12px;
-    box-shadow: 0 24px 80px rgba(0,0,0,0.5);
-    animation: float 4s ease-in-out infinite;
-  }
+  width: 420px;
+  height: 250px;
+  background-image: url('rail pass.png');
+  background-size: 100% 100%; 
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 12px;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.5);
+  animation: float 4s ease-in-out infinite;
+}
   
   @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
 
@@ -462,6 +464,41 @@
     #qr-gen-modal { position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: none; }
     .modal-close, .btn-submit, .btn-outline { display: none !important; }
     .modal { box-shadow: none; border: none; margin-top: 50px; }
+  }
+
+
+  /* ─── MOBILE RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    /* Navigation */
+    .top-nav { flex-direction: column; height: auto; padding: 15px; gap: 15px; }
+    .nav-links { flex-wrap: wrap; justify-content: center; }
+
+    /* Layouts & Grids */
+    .hero, .app-layout, .dashboard-layout, .login-page { grid-template-columns: 1fr; }
+    .hero-stats, .steps-grid, .season-cards, .portals-grid, .footer-grid, .stats-row { grid-template-columns: 1fr; gap: 20px; }
+    .form-grid { grid-template-columns: 1fr; }
+    .season-type-grid { grid-template-columns: 1fr; }
+
+    /* Paddings */
+    .hero, .section, .login-left, .login-right, .success-page { padding: 40px 20px; }
+    .app-main, .dash-main { padding: 20px 15px; }
+    footer { padding: 40px 20px 20px; }
+
+    /* Typography & Visuals */
+    .hero h1 { font-size: 38px; }
+    .hero-train-bg { font-size: 150px; bottom: 20px; right: -20px; }
+    .card-image-preview { width: 100%; height: 200px; }
+    .steps-grid::before { display: none; } /* රේඛාව ෆෝන් එකට ගැලපෙන්නේ නැති නිසා අයින් කිරීම */
+
+    /* Tables & Modals */
+    .table-card { overflow-x: auto; } /* වගුව පැත්තට Scroll කළ හැකි වීම */
+    table { min-width: 600px; }
+    .modal { width: 90%; padding: 24px; }
+    #scanner-modal .modal { width: 95%; }
+
+    /* OTP & Scanner Inputs */
+    .otp-inputs { flex-wrap: wrap; }
+    .otp-input { width: 40px; height: 48px; font-size: 18px; }
   }
 </style>
 </head>
