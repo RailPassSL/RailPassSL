@@ -171,7 +171,7 @@
   animation: float 4s ease-in-out infinite;
 }
   
-  @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+  @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
 
   .hero-stats {
     display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
@@ -469,6 +469,38 @@
 
   /* ─── MOBILE RESPONSIVE ─── */
   @media (max-width: 768px) {
+
+
+    /* පින්තූරය පහළ section එකේ ගැටීම වැළැක්වීම */
+    .hero-visual { margin-bottom: 40px; }
+    
+    /* Scroll Down Indicator - ෆෝන් එකට පමණක් */
+    .scroll-hint {
+      position: fixed;
+      bottom: 24px;
+      right: 20px;
+      background: var(--navy);
+      color: var(--gold);
+      padding: 12px 18px;
+      border-radius: 30px;
+      font-size: 13px;
+      font-weight: 700;
+      box-shadow: 0 8px 24px rgba(10,22,40,0.4);
+      z-index: 9999;
+      display: none; /* ආරම්භයේදී සඟවා තැබේ */
+      align-items: center;
+      gap: 8px;
+      animation: bounceHint 1.5s infinite;
+      border: 2px solid var(--gold);
+    }
+    .scroll-hint.show { display: flex; }
+    
+    @keyframes bounceHint {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+
     /* Navigation */
     .top-nav { flex-direction: column; height: auto; padding: 15px; gap: 15px; }
     .nav-links { flex-wrap: wrap; justify-content: center; }
@@ -1124,5 +1156,8 @@
   function openScanner() { document.getElementById('scanner-modal').classList.add('open'); document.getElementById('reader-container').style.display = 'block'; document.getElementById('scan-result').style.display = 'none'; if (!html5QrCode) { html5QrCode = new Html5Qrcode("reader"); } html5QrCode.start( { facingMode: "environment" }, { fps: 10, qrbox: { width: 250, height: 250 } }, (decodedText, decodedResult) => { html5QrCode.stop().then(() => { isScanning = false; document.getElementById('reader-container').style.display = 'none'; document.getElementById('scan-result').style.display = 'block'; }).catch(err => console.log(err)); }, (errorMessage) => { } ).then(() => { isScanning = true; }).catch((err) => { alert("කැමරාව on කිරීමට නොහැක. බ්‍රවුසරයට Camera Permission ලබා දී ඇත්දැයි පරීක්ෂා කරන්න."); }); }
   function closeScanner() { document.getElementById('scanner-modal').classList.remove('open'); if (html5QrCode && isScanning) { html5QrCode.stop().then(() => { isScanning = false; }).catch(err => console.log(err)); } }
 </script>
+
+<div id="scroll-hint" class="scroll-hint">Scroll Down ⬇️</div>
+
 </body>
 </html>
